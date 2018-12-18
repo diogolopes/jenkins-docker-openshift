@@ -2,7 +2,7 @@ FROM arnaudeprez/jenkins-agent-base:latest
 
 LABEL maintainer="Arnaud Deprez <arnaudeprez@gmail.com>"
 
-ENV GRADLE_VERSION=4.6 \
+ENV GRADLE_VERSION=4.8 \
     GRADLE_HOME=/opt/gradle
 
 USER root
