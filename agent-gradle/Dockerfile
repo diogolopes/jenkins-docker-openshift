@@ -2,14 +2,15 @@ FROM arnaudeprez/jenkins-agent-base:latest
 
 LABEL maintainer="Arnaud Deprez <arnaudeprez@gmail.com>"
 
-ENV GRADLE_VERSION=4.6 \
+ENV GRADLE_VERSION=4.8 \
     GRADLE_HOME=/opt/gradle
 
 USER root
 
 ARG GRADLE_DOWNLOAD_SHA256=98bd5fd2b30e070517e03c51cbb32beee3e2ee1a84003a5a5d748996d4b1b915
-RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686" \
-    && yum install -y --enablerepo=centosplus $INSTALL_PKGS \
+RUN yum-config-manager --enable "rhel-7-server-rpms" \
+    && INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686" \
+    && yum install -y $INSTALL_PKGS \
 	&& echo "Downloading Gradle" \
 	&& curl -fsSL -o gradle.zip "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" \
 	\
